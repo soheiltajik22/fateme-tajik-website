@@ -1,16 +1,47 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+"use client";
+
+import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
-import { testimonials } from "@/data/testimonials";
+import TestimonialForm from "@/components/TestimonialForm";
 import { siteConfig } from "@/data/site";
+import { testimonials as staticTestimonials } from "@/data/testimonials";
 
-export const metadata: Metadata = {
-  title: "نظرات زبان‌آموزان",
-  description: "نظرات و تجربیات زبان‌آموزان کلاس‌های فاطمه تاجیک",
-};
+interface Testimonial {
+  id: string;
+  name: string;
+  level: string;
+  duration: string;
+  goal: string;
+  text: string;
+  rating: number;
+}
 
 export default function TestimonialsPage() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/testimonials")
+      .then((r) => r.json())
+      .then((data) => {
+        // If DB is empty, show static data
+        if (!data || data.length === 0) {
+          setTestimonials(staticTestimonials as Testimonial[]);
+        } else {
+          setTestimonials(data);
+        }
+      })
+      .catch(() => {
+        setTestimonials(staticTestimonials as Testimonial[]);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleNewTestimonial = (t: Testimonial) => {
+    setTestimonials((prev) => [t, ...prev]);
+  };
+
   return (
     <div className="pt-20">
       {/* Hero */}
@@ -26,11 +57,9 @@ export default function TestimonialsPage() {
           <p className="text-navy-300 max-w-xl mx-auto">
             بیش از {siteConfig.studentsCount} زبان‌آموز تا به امروز همراه ما بوده‌اند.
           </p>
-
-          {/* Overall rating */}
           <div className="flex items-center justify-center gap-3 mt-8">
             <div className="flex gap-1">
-              {[1, 2, 3, 4, 5].map((i) => (
+              {[1,2,3,4,5].map((i) => (
                 <Star key={i} className="w-6 h-6 text-gold-400 fill-gold-400" />
               ))}
             </div>
@@ -42,27 +71,26 @@ export default function TestimonialsPage() {
 
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <TestimonialCard key={t.id} testimonial={t} index={i} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1,2,3,4,5,6].map((i) => (
+                <div key={i} className="bg-white rounded-2xl border border-navy-100 p-6 h-48 animate-pulse">
+                  <div className="h-4 bg-navy-100 rounded mb-3 w-3/4" />
+                  <div className="h-3 bg-navy-100 rounded mb-2" />
+                  <div className="h-3 bg-navy-100 rounded mb-2 w-5/6" />
+                  <div className="h-3 bg-navy-100 rounded w-2/3" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {testimonials.map((t, i) => (
+                <TestimonialCard key={t.id} testimonial={t} index={i} />
+              ))}
+            </div>
+          )}
 
-          {/* Add your review CTA */}
-          <div className="mt-12 bg-white rounded-2xl border border-navy-100 shadow-sm p-8 text-center">
-            <h2 className="font-bold text-navy-900 text-xl mb-3">
-              شما هم زبان‌آموز هستید؟
-            </h2>
-            <p className="text-navy-500 mb-6">
-              تجربه‌تان را با ما در میان بگذارید.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 btn-primary"
-            >
-              ارسال نظر
-            </Link>
-          </div>
+          <TestimonialForm onNewTestimonial={handleNewTestimonial} />
         </div>
       </section>
     </div>
