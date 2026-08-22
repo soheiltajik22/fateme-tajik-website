@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, GraduationCap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, siteConfig } from "@/data/site";
 
@@ -49,7 +49,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl bg-navy-800 flex items-center justify-center shadow-md group-hover:bg-navy-900 transition-colors">
-              <span className="text-white font-bold text-lg">ف</span>
+              <GraduationCap className="w-5 h-5 text-white" />
             </div>
             <div className="hidden sm:block">
               <p className="font-bold text-navy-900 leading-tight text-sm">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Instagram, Send, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Instagram, Send, Clock, GraduationCap } from "lucide-react";
 import { navLinks, siteConfig } from "@/data/site";
 
 const footerLinks = {
@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-11 h-11 rounded-xl bg-gold-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">ف</span>
+                <GraduationCap className="w-5 h-5 text-white" />
               </div>
               <div>
                 <p className="font-bold text-white text-lg leading-tight">فاطمه تاجیک</p>
