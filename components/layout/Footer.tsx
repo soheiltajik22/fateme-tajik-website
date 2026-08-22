@@ -145,7 +145,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-1">
               <span>طراحی و توسعه توسط</span>
-              <span className="text-gold-400 font-medium">[توسعه‌دهنده]</span>
+              <span className="text-gold-400 font-medium">Soheil Tajik</span>
             </div>
           </div>
         </div>
