@@ -32,7 +32,7 @@ export default function ServicesPage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {services.map((service, i) => (
-              <ServiceCard key={service.id} service={service} index={i} id={service.id} />
+              <ServiceCard key={service.id} service={service} index={i} />
             ))}
           </div>
         </div>
