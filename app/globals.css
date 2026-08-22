@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 99%;
+    --foreground: 215 28% 17%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 17%;
+
+    --primary: 214 47% 23%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 38 72% 47%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 38 72% 47%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 214 47% 23%;
+
+    --radius: 0.75rem;
+
+    --font-vazirmatn: 'Vazirmatn', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    direction: rtl;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-vazirmatn), 'Tahoma', Arial, sans-serif;
+    font-feature-settings: "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Persian number rendering */
+  .persian-nums {
+    font-variant-numeric: traditional;
+  }
+
+  /* Smooth scrolling */
+  * {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334e68;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #243b53;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .heading-primary {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight;
+  }
+
+  .heading-section {
+    @apply text-2xl md:text-3xl font-bold text-navy-900;
+  }
+
+  .text-body {
+    @apply text-navy-700 leading-relaxed;
+  }
+
+  .btn-primary {
+    @apply bg-navy-800 hover:bg-navy-900 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-gold-500 hover:bg-gold-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+
+  .btn-outline {
+    @apply border-2 border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .gradient-navy {
+    @apply bg-gradient-to-br from-navy-800 to-navy-950;
+  }
+
+  .gradient-gold {
+    @apply bg-gradient-to-br from-gold-400 to-gold-600;
+  }
+
+  .section-badge {
+    @apply inline-flex items-center gap-2 bg-gold-50 text-gold-700 border border-gold-200 px-4 py-1.5 rounded-full text-sm font-medium mb-4;
+  }
+
+  /* RTL-specific overrides */
+  [dir="rtl"] .ltr-text {
+    direction: ltr;
+    text-align: left;
+  }
+
+  /* Form inputs RTL */
+  input, textarea, select {
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* Smooth page transitions */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 400ms, transform 400ms;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20;
+  }
+
+  .gold-line {
+    @apply w-12 h-1 bg-gold-500 rounded-full mx-auto;
+  }
+
+  .gold-line-right {
+    @apply w-12 h-1 bg-gold-500 rounded-full;
+  }
+
+  /* Arabesque/geometric decorative element */
+  .decorative-dot {
+    @apply w-2 h-2 rounded-full bg-gold-400 inline-block;
+  }
+}
