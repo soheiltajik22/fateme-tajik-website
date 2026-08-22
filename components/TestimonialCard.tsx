@@ -52,7 +52,7 @@ export default function TestimonialCard({
 
       {/* Text */}
       <p className="text-navy-700 text-sm leading-relaxed flex-1 mb-5">
-        "{testimonial.text}"
+        &ldquo;{testimonial.text}&rdquo;
       </p>
 
       {/* Footer */}
