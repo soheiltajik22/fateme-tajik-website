@@ -145,7 +145,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-1">
               <span>طراحی و توسعه توسط</span>
-              <span className="text-gold-400 font-medium">Soheil Tajik</span>
+              <a href="https://soheiltk.de" target="_blank" rel="noopener noreferrer" className="text-gold-400 font-medium hover:text-gold-300 underline underline-offset-2 transition-colors">Soheil Tajik</a>
             </div>
           </div>
         </div>
