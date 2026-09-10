@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Instagram, Send, Clock, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
 const contactItems = [
@@ -9,14 +9,7 @@ const contactItems = [
     icon: Phone,
     label: "تلفن",
     value: siteConfig.phone,
-    href: `tel:${siteConfig.phone}`,
-    ltr: true,
-  },
-  {
-    icon: MessageCircle,
-    label: "واتساپ",
-    value: siteConfig.whatsapp,
-    href: `https://wa.me/${siteConfig.whatsapp}`,
+    href: `tel:${siteConfig.phoneLink}`,
     ltr: true,
   },
   {
@@ -79,7 +72,7 @@ export default function ContactInfo() {
         </div>
 
         {/* Contact grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
           {contactItems.map(({ icon: Icon, label, value, href, ltr }, i) => (
             <motion.a
               key={label}
@@ -106,39 +99,8 @@ export default function ContactInfo() {
           ))}
         </div>
 
-        {/* Social + Hours */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Social */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="p-6 rounded-2xl border border-white/10 bg-white/5"
-          >
-            <p className="text-navy-300 text-sm mb-4">شبکه‌های اجتماعی</p>
-            <div className="flex items-center gap-4">
-              <a
-                href={`https://instagram.com/${siteConfig.instagram}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white hover:text-gold-400 transition-colors text-sm"
-              >
-                <Instagram className="w-5 h-5" />
-                <span dir="ltr">{siteConfig.instagram}</span>
-              </a>
-              <a
-                href={`https://t.me/${siteConfig.telegram}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white hover:text-gold-400 transition-colors text-sm"
-              >
-                <Send className="w-5 h-5" />
-                <span dir="ltr">{siteConfig.telegram}</span>
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Hours */}
+        {/* Hours */}
+        <div className="grid grid-cols-1">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

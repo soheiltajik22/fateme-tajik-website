@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Instagram, Send, Clock, GraduationCap } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, GraduationCap } from "lucide-react";
 import { navLinks, siteConfig } from "@/data/site";
 
 const footerLinks = {
@@ -33,27 +33,6 @@ export default function Footer() {
             <p className="text-navy-300 text-sm leading-relaxed mb-6">
               آموزش حرفه‌ای زبان آلمانی در هرات با بیش از {siteConfig.experience} سال تجربه. کلاس‌های خصوصی، آنلاین و گروهی از سطح A1 تا B2.
             </p>
-            {/* Social links */}
-            <div className="flex items-center gap-3">
-              <a
-                href={`https://instagram.com/${siteConfig.instagram}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-navy-800 hover:bg-gold-500 flex items-center justify-center transition-colors"
-                aria-label="اینستاگرام"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={`https://t.me/${siteConfig.telegram}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-navy-800 hover:bg-gold-500 flex items-center justify-center transition-colors"
-                aria-label="تلگرام"
-              >
-                <Send className="w-4 h-4" />
-              </a>
-            </div>
           </div>
 
           {/* Quick links */}
@@ -104,7 +83,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href={`tel:${siteConfig.phone}`}
+                  href={`tel:${siteConfig.phoneLink}`}
                   className="flex items-start gap-3 text-navy-300 hover:text-gold-400 transition-colors group"
                 >
                   <Phone className="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:text-gold-400" />

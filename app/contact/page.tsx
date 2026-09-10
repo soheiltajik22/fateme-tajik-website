@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MapPin, MessageCircle, Send, Clock, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import { siteConfig } from "@/data/site";
 
@@ -13,16 +13,8 @@ const contactMethods = [
     icon: Phone,
     label: "تلفن",
     value: siteConfig.phone,
-    href: `tel:${siteConfig.phone}`,
+    href: `tel:${siteConfig.phoneLink}`,
     desc: "برای تماس مستقیم",
-    ltr: true,
-  },
-  {
-    icon: MessageCircle,
-    label: "واتساپ",
-    value: siteConfig.whatsapp,
-    href: `https://wa.me/${siteConfig.whatsapp}`,
-    desc: "پیام سریع‌تر",
     ltr: true,
   },
   {
@@ -65,7 +57,7 @@ export default function ContactPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           {/* Contact cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          <div className="grid sm:grid-cols-3 gap-5 mb-12">
             {contactMethods.map(({ icon: Icon, label, value, href, desc, ltr }) => (
               <a
                 key={label}
@@ -112,31 +104,6 @@ export default function ContactPage() {
                 <div className="space-y-2 text-sm text-navy-600">
                   <p>{siteConfig.workingHours.weekdays}</p>
                   <p>{siteConfig.workingHours.friday}</p>
-                </div>
-              </div>
-
-              {/* Social */}
-              <div className="bg-navy-900 rounded-2xl p-6 text-white">
-                <h3 className="font-bold mb-4">شبکه‌های اجتماعی</h3>
-                <div className="space-y-3">
-                  <a
-                    href={`https://instagram.com/${siteConfig.instagram}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-white/10 hover:bg-white/15 px-4 py-3 rounded-xl transition-colors text-sm"
-                  >
-                    <Instagram className="w-4 h-4 text-gold-400" />
-                    <span dir="ltr">{siteConfig.instagram}</span>
-                  </a>
-                  <a
-                    href={`https://t.me/${siteConfig.telegram}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-white/10 hover:bg-white/15 px-4 py-3 rounded-xl transition-colors text-sm"
-                  >
-                    <Send className="w-4 h-4 text-gold-400" />
-                    <span dir="ltr">{siteConfig.telegram}</span>
-                  </a>
                 </div>
               </div>
 

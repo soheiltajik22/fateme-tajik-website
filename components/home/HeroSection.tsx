@@ -85,11 +85,11 @@ export default function HeroSection() {
                 رزرو کلاس
               </Link>
               <Link
-                href="/resume"
+                href="/about"
                 className="flex items-center gap-2 bg-white/10 hover:bg-white/15 backdrop-blur-sm text-white border border-white/20 px-6 py-3.5 rounded-xl font-semibold transition-all duration-300"
               >
                 <FileText className="w-5 h-5" />
-                مشاهده رزومه
+                درباره من
               </Link>
               <Link
                 href="/contact"

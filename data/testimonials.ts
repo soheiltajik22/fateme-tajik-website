@@ -12,7 +12,7 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: "1",
-    name: "سارا احمدی",
+    name: "ستایش تاجیک",
     level: "B1",
     duration: "۹ ماه",
     rating: 5,
@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "2",
-    name: "محمد رضایی",
+    name: "سحر تاجیک",
     level: "A2",
     duration: "۶ ماه",
     rating: 5,
@@ -39,7 +39,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "4",
-    name: "علی نوری",
+    name: "نرگس احمدی",
     level: "A1",
     duration: "۳ ماه",
     rating: 5,
@@ -57,7 +57,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "6",
-    name: "امیر صادقی",
+    name: "مریم صادقی",
     level: "A2",
     duration: "۵ ماه",
     rating: 5,

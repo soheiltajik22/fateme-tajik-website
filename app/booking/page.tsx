@@ -56,14 +56,14 @@ export default function BookingPage() {
               <div className="bg-navy-900 rounded-2xl p-6 text-white">
                 <p className="font-semibold mb-1">ترجیح می‌دهید مستقیم تماس بگیرید؟</p>
                 <p className="text-navy-300 text-sm mb-4">
-                  از طریق تلفن یا واتساپ هم می‌توانید رزرو کنید.
+                  از طریق تلفن هم می‌توانید رزرو کنید.
                 </p>
                 <a
-                  href={`tel:${siteConfig.phone}`}
+                  href={`tel:${siteConfig.phoneLink}`}
                   className="flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  {siteConfig.phone}
+                  <span dir="ltr">{siteConfig.phone}</span>
                 </a>
               </div>
 

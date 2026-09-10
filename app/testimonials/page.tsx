@@ -1,47 +1,16 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { Star } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
-import TestimonialForm from "@/components/TestimonialForm";
 import { siteConfig } from "@/data/site";
-import { testimonials as staticTestimonials } from "@/data/testimonials";
+import { testimonials } from "@/data/testimonials";
 
-interface Testimonial {
-  id: string;
-  name: string;
-  level: string;
-  duration: string;
-  goal: string;
-  text: string;
-  rating: number;
-}
+export const metadata: Metadata = {
+  title: "نظرات",
+  description: "تجربه زبان‌آموزان کلاس‌های زبان آلمانی فاطمه تاجیک",
+};
 
 export default function TestimonialsPage() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/api/testimonials")
-      .then((r) => r.json())
-      .then((data) => {
-        // If DB is empty, show static data
-        if (!data || data.length === 0) {
-          setTestimonials(staticTestimonials as Testimonial[]);
-        } else {
-          setTestimonials(data);
-        }
-      })
-      .catch(() => {
-        setTestimonials(staticTestimonials as Testimonial[]);
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  const handleNewTestimonial = (t: Testimonial) => {
-    setTestimonials((prev) => [t, ...prev]);
-  };
-
   return (
     <div className="pt-20">
       {/* Hero */}
@@ -59,38 +28,44 @@ export default function TestimonialsPage() {
           </p>
           <div className="flex items-center justify-center gap-3 mt-8">
             <div className="flex gap-1">
-              {[1,2,3,4,5].map((i) => (
+              {[1, 2, 3, 4, 5].map((i) => (
                 <Star key={i} className="w-6 h-6 text-gold-400 fill-gold-400" />
               ))}
             </div>
             <span className="text-white font-black text-2xl">۵.۰</span>
-            <span className="text-navy-300 text-sm">از {siteConfig.studentsCount} نظر</span>
+            <span className="text-navy-300 text-sm">
+              از {siteConfig.studentsCount} نظر
+            </span>
           </div>
         </div>
       </section>
 
+      {/* Cards */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1,2,3,4,5,6].map((i) => (
-                <div key={i} className="bg-white rounded-2xl border border-navy-100 p-6 h-48 animate-pulse">
-                  <div className="h-4 bg-navy-100 rounded mb-3 w-3/4" />
-                  <div className="h-3 bg-navy-100 rounded mb-2" />
-                  <div className="h-3 bg-navy-100 rounded mb-2 w-5/6" />
-                  <div className="h-3 bg-navy-100 rounded w-2/3" />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {testimonials.map((t, i) => (
-                <TestimonialCard key={t.id} testimonial={t} index={i} />
-              ))}
-            </div>
-          )}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <TestimonialCard key={t.id} testimonial={t} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <TestimonialForm onNewTestimonial={handleNewTestimonial} />
+      {/* CTA */}
+      <section className="py-16 bg-navy-900">
+        <div className="container-custom text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            شما هم می‌خواهید شروع کنید؟
+          </h2>
+          <p className="text-navy-300 mb-8">
+            اولین جلسه ارزیابی رایگان است — بدون تعهد.
+          </p>
+          <Link
+            href="/booking"
+            className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            رزرو جلسه رایگان
+          </Link>
         </div>
       </section>
     </div>

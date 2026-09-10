@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { CheckCircle2, GraduationCap, Heart, Target } from "lucide-react";
+import {
+  CheckCircle2,
+  GraduationCap,
+  Heart,
+  Target,
+  Award,
+  Briefcase,
+  Phone,
+  Mail,
+  MapPin,
+} from "lucide-react";
 import { siteConfig } from "@/data/site";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "درباره من",
-  description: "آشنایی با فاطمه تاجیک، مدرس زبان آلمانی در هرات",
+  description:
+    "آشنایی با فاطمه تاجیک، مدرس زبان آلمانی در هرات — تجربه، مدارک و رزومه حرفه‌ای",
 };
 
 const values = [
@@ -27,27 +38,43 @@ const values = [
   },
 ];
 
-const timeline = [
+const experience = [
   {
-    year: "[سال]",
-    title: "[مدرک/دستاورد]",
-    desc: "[توضیح کوتاه این مرحله از مسیر تحصیلی یا حرفه‌ای]",
-  },
-  {
-    year: "[سال]",
-    title: "[مدرک/دستاورد]",
-    desc: "[توضیح کوتاه]",
-  },
-  {
-    year: "[سال]",
-    title: "شروع تدریس رسمی",
-    desc: "شروع فعالیت رسمی به‌عنوان مدرس زبان آلمانی در هرات",
-  },
-  {
-    year: "تاکنون",
     title: "مدرس زبان آلمانی",
-    desc: `آموزش به بیش از ${siteConfig.studentsCount} زبان‌آموز در کلاس‌های خصوصی، آنلاین و گروهی`,
+    place: "[مؤسسه / آموزشگاه / تدریس مستقل]",
+    period: "[سال شروع] – تاکنون",
+    items: [
+      `تدریس دوره‌های A1 تا B2 به بیش از ${siteConfig.studentsCount} زبان‌آموز`,
+      "برنامه‌ریزی و طراحی محتوای آموزشی",
+      "آماده‌سازی زبان‌آموزان برای آزمون‌های Goethe و TestDaF",
+      "برگزاری کلاس‌های آنلاین و حضوری",
+    ],
   },
+  {
+    title: "[سمت قبلی]",
+    place: "[مؤسسه / آموزشگاه]",
+    period: "[دوره]",
+    items: ["[توضیح مسئولیت‌ها]", "[توضیح دستاوردها]"],
+  },
+];
+
+const languages = [
+  { lang: "زبان آلمانی", level: "[سطح شما]", pct: 90 },
+  { lang: "زبان فارسی / دری", level: "بومی", pct: 100 },
+  { lang: "زبان انگلیسی", level: "[سطح]", pct: 70 },
+];
+
+const teachingSkills = [
+  "مکالمه روزمره",
+  "گرامر",
+  "نگارش",
+  "تلفظ",
+  "آمادگی آزمون Goethe",
+  "TestDaF",
+  "تدریس آنلاین",
+  "طراحی محتوا",
+  "کلاس گروهی",
+  "کلاس خصوصی",
 ];
 
 export default function AboutPage() {
@@ -66,6 +93,28 @@ export default function AboutPage() {
           <p className="text-navy-300 max-w-2xl mx-auto text-lg">
             مدرس زبان آلمانی در هرات با {siteConfig.experience} سال تجربه و اشتیاق به آموزش.
           </p>
+
+          {/* Quick facts */}
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mt-10 text-sm">
+            <span className="flex items-center gap-2 text-navy-300">
+              <MapPin className="w-4 h-4 text-gold-400" />
+              {siteConfig.address}
+            </span>
+            <a
+              href={`tel:${siteConfig.phoneLink}`}
+              className="flex items-center gap-2 text-navy-300 hover:text-gold-400 transition-colors"
+            >
+              <Phone className="w-4 h-4 text-gold-400" />
+              <span dir="ltr">{siteConfig.phone}</span>
+            </a>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="flex items-center gap-2 text-navy-300 hover:text-gold-400 transition-colors"
+            >
+              <Mail className="w-4 h-4 text-gold-400" />
+              <span dir="ltr">{siteConfig.email}</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -144,29 +193,105 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Resume */}
       <section className="section-padding bg-white">
-        <div className="container-custom max-w-3xl">
+        <div className="container-custom max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="heading-section mb-4">مسیر حرفه‌ای</h2>
+            <h2 className="heading-section mb-4">رزومه حرفه‌ای</h2>
+            <p className="text-navy-500 max-w-xl mx-auto">
+              خلاصه‌ای از تجربه، تخصص و مهارت‌های تدریس من.
+            </p>
           </div>
-          <div className="relative">
-            <div className="absolute right-6 top-0 bottom-0 w-0.5 bg-navy-100" />
-            <div className="space-y-8">
-              {timeline.map((item, i) => (
-                <div key={i} className="flex gap-6 items-start">
-                  <div className="relative flex-shrink-0">
-                    <div className="w-12 h-12 rounded-full bg-navy-800 flex items-center justify-center text-white text-xs font-bold z-10 relative">
-                      {item.year.length <= 4 ? item.year : "✓"}
+
+          <div className="grid gap-8">
+            {/* Summary */}
+            <div className="bg-gray-50 rounded-2xl border border-navy-100 p-8">
+              <h3 className="flex items-center gap-3 text-lg font-bold text-navy-900 mb-4">
+                <span className="w-8 h-8 rounded-lg bg-gold-50 flex items-center justify-center">
+                  <Award className="w-4 h-4 text-gold-600" />
+                </span>
+                خلاصه حرفه‌ای
+              </h3>
+              <p className="text-navy-600 leading-loose text-sm">
+                مدرس زبان آلمانی با {siteConfig.experience} سال تجربه در تدریس به زبان‌آموزان با اهداف متنوع — از مهاجرت و تحصیل تا آزمون‌های رسمی. دارای تجربه در تدریس خصوصی، آنلاین و گروهی. آشنا با متدهای روز آموزش زبان و کتاب‌های معتبر بین‌المللی.
+              </p>
+            </div>
+
+            {/* Experience */}
+            <div className="bg-gray-50 rounded-2xl border border-navy-100 p-8">
+              <h3 className="flex items-center gap-3 text-lg font-bold text-navy-900 mb-6">
+                <span className="w-8 h-8 rounded-lg bg-navy-100 flex items-center justify-center">
+                  <Briefcase className="w-4 h-4 text-navy-700" />
+                </span>
+                تجربه کاری
+              </h3>
+              <div className="space-y-6">
+                {experience.map((exp, i) => (
+                  <div key={i} className="border-r-2 border-gold-300 pr-6">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
+                      <div>
+                        <h4 className="font-bold text-navy-900">{exp.title}</h4>
+                        <p className="text-navy-500 text-sm">{exp.place}</p>
+                      </div>
+                      <span className="text-xs bg-white text-navy-600 border border-navy-100 px-3 py-1 rounded-full flex-shrink-0">
+                        {exp.period}
+                      </span>
                     </div>
+                    <ul className="space-y-1.5">
+                      {exp.items.map((item, j) => (
+                        <li
+                          key={j}
+                          className="flex items-start gap-2 text-sm text-navy-600"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-gold-400 mt-1.5 flex-shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="bg-gray-50 rounded-2xl p-5 flex-1 border border-navy-100">
-                    <p className="text-xs text-navy-400 mb-1">{item.year}</p>
-                    <h3 className="font-bold text-navy-900 mb-2">{item.title}</h3>
-                    <p className="text-navy-600 text-sm leading-relaxed">{item.desc}</p>
+                ))}
+              </div>
+            </div>
+
+            {/* Skills */}
+            <div className="bg-gray-50 rounded-2xl border border-navy-100 p-8">
+              <h3 className="text-lg font-bold text-navy-900 mb-6">مهارت‌ها</h3>
+              <div className="grid sm:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="font-semibold text-navy-800 mb-3 text-sm">
+                    مهارت‌های زبانی
+                  </h4>
+                  {languages.map(({ lang, level, pct }) => (
+                    <div key={lang} className="mb-3">
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-navy-700">{lang}</span>
+                        <span className="text-navy-400">{level}</span>
+                      </div>
+                      <div className="h-2 bg-navy-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-navy-800 rounded-full"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <h4 className="font-semibold text-navy-800 mb-3 text-sm">
+                    تخصص تدریس
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {teachingSkills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="text-xs bg-white text-navy-700 border border-navy-100 px-3 py-1.5 rounded-full"
+                      >
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>

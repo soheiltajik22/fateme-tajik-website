@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Loader2, Send } from "lucide-react";
+import { CheckCircle2, Loader2, Send, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/data/site";
 
 interface ContactFormData {
   name: string;
@@ -37,11 +38,24 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const buildWhatsappUrl = () => {
+    const lines = ["*پیام از وبسایت*", "", `نام: ${form.name}`];
+    if (form.phone.trim()) lines.push(`شماره تماس: ${form.phone}`);
+    if (form.email.trim()) lines.push(`ایمیل: ${form.email}`);
+    if (form.subject.trim()) lines.push(`موضوع: ${form.subject}`);
+    lines.push("", `پیام: ${form.message.trim()}`);
+
+    return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
+      lines.join("\n")
+    )}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    window.open(buildWhatsappUrl(), "_blank", "noopener,noreferrer");
+    await new Promise((resolve) => setTimeout(resolve, 600));
     setLoading(false);
     setSubmitted(true);
   };
@@ -67,11 +81,23 @@ export default function ContactForm() {
           <CheckCircle2 className="w-10 h-10 text-emerald-500" />
         </div>
         <h3 className="text-2xl font-bold text-navy-900 mb-3">
-          پیام شما ارسال شد!
+          پیام شما آماده ارسال است!
         </h3>
-        <p className="text-navy-600 mb-6">
-          ممنون از پیام شما. به زودی پاسخ خواهیم داد.
+        <p className="text-navy-600 mb-6 leading-relaxed">
+          واتساپ در یک تب جدید باز شد. فقط دکمه ارسال را بزنید.
+          <br />
+          اگر باز نشد، روی دکمه زیر کلیک کنید.
         </p>
+        <a
+          href={buildWhatsappUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors mb-5"
+        >
+          <MessageSquare className="w-4 h-4" />
+          ارسال در واتساپ
+        </a>
+        <br />
         <button
           onClick={() => { setSubmitted(false); setForm(initialForm); }}
           className="text-sm text-navy-600 hover:text-navy-800 underline underline-offset-4 transition-colors"

@@ -4,12 +4,12 @@ export const siteConfig = {
   description:
     "مدرس زبان آلمانی در هرات | کلاس‌های خصوصی، آنلاین و حضوری از A1 تا B2",
   url: "https://fatemeh-tajik.com", // placeholder
-  phone: "[شماره تماس]",
-  whatsapp: "[شماره واتساپ]",
-  email: "[ایمیل]",
+  phone: "079 135 2169",
+  phoneLink: "+93791352169",
+  // Nur intern für die Formulare — wird nirgends auf der Seite angezeigt
+  whatsappNumber: "93791352169",
+  email: "tajikf924@gmail.com",
   address: "هرات، افغانستان",
-  instagram: "[آیدی اینستاگرام]",
-  telegram: "[آیدی تلگرام]",
   experience: "۵+ سال",
   studentsCount: "۲۰۰+",
   successRate: "۹۵٪",
@@ -28,10 +28,8 @@ export const siteConfig = {
 export const navLinks = [
   { href: "/", label: "خانه" },
   { href: "/about", label: "درباره من" },
-  { href: "/resume", label: "رزومه" },
   { href: "/services", label: "خدمات" },
   { href: "/courses", label: "دوره‌ها" },
-  { href: "/blog", label: "وبلاگ" },
   { href: "/testimonials", label: "نظرات" },
   { href: "/contact", label: "تماس" },
 ];
